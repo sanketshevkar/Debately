@@ -13,6 +13,8 @@ build/
 
 firebase/
 
+symblToken.js
+
 # misc
 .DS_Store
 .env.local
