@@ -1,2 +1,3 @@
-def sample():
-    print ("Hello Casanova")
+from fastapi import FastAPI
+from pydantic import BaseModel
+
