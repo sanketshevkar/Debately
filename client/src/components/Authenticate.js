@@ -22,9 +22,10 @@ const Authenticate = () => {
       return;
     }
     try {
-      const data = await loginUser(email);
+      await loginUser(email);
       setLoading(false);
       history.push('/dashboard');
+      window.location.reload();
     } catch (error) {
       setError('Unable to log in');
       console.error(error);
