@@ -1,21 +1,37 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
-import { logoutUser } from '../services/magic';
+import React from 'react';
+import AudioPlayer from './AudioPlayer';
 
 const DebateRoom = () => {
-  const { email } = useContext(UserContext);
-  const history = useHistory();
-  const handleLogOut = async () => {
-    try {
-      await logoutUser();
-      history.replace('/');
-    } catch (error) {
-      console.error(error);
-    }
-  };
+
   return (
     <div>
+      <div>
+        Debate Topic
+      </div>
+      <div>
+        Timer
+      </div>
+      <div>
+        <AudioPlayer />
+      </div>
+      <div>
+        <AudioPlayer />
+      </div>
+      <div>
+        DebateRoom id
+      </div>
+      <button>
+        Start Microphone
+      </button>
+      <button>
+        Create Debate Room
+      </button>
+      <button>
+        Join by Id
+      </button>
+      <button>
+        End Debate
+      </button>
     </div>
   );
 };
