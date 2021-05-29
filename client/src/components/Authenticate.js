@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../services/magic";
+import { ThunderboltOutlined } from "@ant-design/icons";
 import {
   Form,
   Input,
@@ -12,7 +13,7 @@ import {
   Image,
   Layout,
 } from "antd";
-import logo from "../assets/logo512.png";
+import logo from "../assets/LandingVector.png";
 
 const Authenticate = () => {
   const { Title } = Typography;
@@ -47,47 +48,49 @@ const Authenticate = () => {
   return (
     <div>
       <Row>
-        <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
-          <Card>
-            <Title>Login</Title>
+        <Col span={8}>
+          <div style={{borderStyle:'solid' ,borderRadius: '20px',  margin: '3rem',borderColor: 'gray', width: '30rem', padding: '10px'}}>
+            <Title><span style={{fontSize: '3rem', color: 'gray', display: "flex",
+  justifyContent: "center",
+  alignItems: "center"}}>Login 🔒</span></Title>
 
             <Form onFinish={handleSubmit}>
               <Form.Item
-                label="Email"
-                name="email"
                 rules={[
                   { required: true, message: "Please input your email!" },
                 ]}
               >
                 <Input
+                  size="large"
                   type="email"
                   name="email"
                   value={email}
+                  placeholder="Email"
                   onChange={handleChange}
                 />
               </Form.Item>
 
               <Form.Item>
-                <Button type="primary" htmlType="submit">
-                  {loading ? "Loading..." : "Send"}
+                <div style={{display: "flex",
+  justifyContent: "center",
+  alignItems: "center"}}>
+                <Button type="danger" size="large" shape="round" htmlType="submit" icon={<ThunderboltOutlined />}>
+                  {loading ? "Loading..." : "Go"}
                 </Button>
+                </div>
               </Form.Item>
             </Form>
-          </Card>
-          <h1>Content</h1>
-          <h1>Content</h1>
-          <h1>Content</h1>
-          <h1>Content</h1>
+          </div>
+          <div style={{margin: "3rem"}}>
+            <span style={{fontSize: "2.6rem"}}>
+               New, Fun and Safe To Practice Debating!
+            </span>
+          </div>
         </Col>
 
-        <Col span={4}></Col>
 
-        <Col span={4}>
+        <Col span={10} push={5}>
           <Image src={logo} />
-          <h1>Content</h1>
-          <h1>Content</h1>
-          <h1>Content</h1>
-          <h1>Content</h1>
         </Col>
       </Row>
     </div>
