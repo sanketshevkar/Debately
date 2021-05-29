@@ -8,6 +8,7 @@ import { UserContext } from "../context/UserContext";
 import { logoutUser } from "../services/magic";
 import DebateRoom from "./DebateRoom";
 const Dashboard = () => {
+  const [debate, setDebate] = useState(false);
   const { email } = useContext(UserContext);
   const history = useHistory();
   const handleLogOut = async () => {
@@ -21,19 +22,8 @@ const Dashboard = () => {
   if(debate === true){
     return(
       <div style={{ margin: "2rem" }}>
-          <DebateRoom />
-        </div>
-    )
-  }else{
-    return( <div style={{ margin: "2rem" }}>
-    <ProfileViewer/>
-  </div>
-  )
-
-  }
-  return (
-    <div>
-        <div style={{display: "flex",
+          <DebateRoom debate={setDebate}/>
+          <div style={{display: "flex",
           justifyContent: "center",
             alignItems: "center", marginTop: '2rem'}}>
           <Button
@@ -46,7 +36,27 @@ const Dashboard = () => {
             Sign Out
           </Button>
         </div>
-      </div>
-  );
+        </div>
+    )
+  }else{
+    return( <div style={{ margin: "2rem" }}>
+    <ProfileViewer debate={setDebate}/>
+    <div style={{display: "flex",
+          justifyContent: "center",
+            alignItems: "center", marginTop: '2rem'}}>
+          <Button
+            type="danger"
+            shape="round"
+            icon={<LogoutOutlined />}
+            size="large"
+            onClick={handleLogOut}
+          >
+            Sign Out
+          </Button>
+        </div>
+  </div>
+  )
+
+  }
 };
 export default withRouter(Dashboard);

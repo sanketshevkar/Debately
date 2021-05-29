@@ -4,8 +4,9 @@ import { Row, Col, Button } from 'antd';
 import firebase from '../firebase/index';
 import Modal from './Modal';
 import symblToken from '../symblToken';
+import { PropertySafetyFilled } from '@ant-design/icons';
 
-const DebateRoom = () => {
+const DebateRoom = (props) => {
   const [mediaButton, setMediaButton] = useState(false);
   const [createRoomButton, setCreateRoomButton] = useState(true);
   const [joinRoomButton, setJoinRoomButton] = useState(true);
@@ -230,6 +231,7 @@ const DebateRoom = () => {
     setCreateRoomButton(true);
     setHangUpButton(true);
     setRoomId("");
+    props.debate(false);
   }
 
   const onClickSymbl = () =>{

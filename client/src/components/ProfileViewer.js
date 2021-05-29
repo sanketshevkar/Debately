@@ -20,7 +20,7 @@ const ProfileViewer = (props) => {
   }, []);
 
   const onClickHandler = () =>{
-    console.log(props)
+    props.debate(true)
   }
   return (
     <div>
