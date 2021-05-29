@@ -13,7 +13,7 @@ build/
 
 firebase/
 
-symblToken.js
+magicKey.js
 
 # misc
 .DS_Store
