@@ -10,6 +10,8 @@ import { UserContext } from './context/UserContext';
 import { checkUser } from './services/magic';
 import Authenticate from './components/Authenticate';
 import Dashboard from './components/Dashboard';
+import Meeting from './components/Meeting';
+import DebateRoom from './components/DebateRoom';
 import PrivateRoute from './components/PrivateRoute';
 const App = () => {
   const [user, setUser] = useState({ isLoggedIn: null, email: '' });
@@ -43,6 +45,8 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={Authenticate} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/meetings" component={Meeting} />
+          <PrivateRoute path="/debateRoom" component={DebateRoom} />
         </Switch>
       </Router>
     </UserContext.Provider>

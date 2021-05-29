@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { useHistory, withRouter } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+import { useHistory } from 'react-router-dom';
 import { UserContext } from '../context/UserContext';
 import { logoutUser } from '../services/magic';
-const Dashboard = () => {
+
+const Meeting = () => {
   const { email } = useContext(UserContext);
   const history = useHistory();
   const handleLogOut = async () => {
@@ -15,14 +15,8 @@ const Dashboard = () => {
     }
   };
   return (
-    <div className="p-2">
-      <div className="d-flex justify-content-end">
-        <Button variant="primary" onClick={handleLogOut}>
-          Sign Out
-        </Button>
-      </div>
-      <h1 className="h1">User: {email}</h1>
+    <div>
     </div>
   );
 };
-export default withRouter(Dashboard);
+export default Meeting;
