@@ -4,10 +4,19 @@ import {
   UserOutlined,
   CheckSquareFilled,
   AudioOutlined,
+  AudioMutedOutlined
 } from "@ant-design/icons";
 import "antd/dist/antd.css";
 
-const AudioPlayer = () => {
+const MuteLogo = (props) =>{
+  if(props.status === false){
+    return(<AudioOutlined />)
+  }else{
+    return(<AudioMutedOutlined />)
+  }
+}
+
+const AudioPlayer = (props) => {
   return (
     <div>
       <div
@@ -29,7 +38,7 @@ const AudioPlayer = () => {
           alignItems: "center",
         }}
       >
-        <strong>username</strong>
+        <strong>{props.user}</strong>
       </span>
       <div
         style={{
@@ -40,7 +49,7 @@ const AudioPlayer = () => {
       >
         <CheckSquareFilled style={{ color: "green" }} />
         <span style={{ fontColor: "black", font: "roboto", fontSize: "20px" }}>
-          online
+          {props.status}
         </span>
       </div>
       <div
@@ -50,7 +59,7 @@ const AudioPlayer = () => {
           alignItems: "center",
         }}
       >
-        <Button shape="circle" size="large" icon={<AudioOutlined />} />
+        <Button shape="circle" size="large" icon={<MuteLogo status={props.mute} />} onClick={props.setMute}>{props.mute}</Button>
       </div>
     </div>
   );

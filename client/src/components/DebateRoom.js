@@ -13,6 +13,10 @@ const DebateRoom = (props) => {
   const [hangUpButton, setHangUpButton] = useState(true);
   const [roomId, setRoomId] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [host, setHost] = useState("");
+  const [guest, setGuest] = useState("");
+  const [status, setStatus] = useState("Not Connected");
+  const [mute, setMute] = useState(false);
 
   const localStream = useRef();
   const remoteStream = useRef();
@@ -26,6 +30,7 @@ const DebateRoom = (props) => {
     });
   
     peerConnection.addEventListener('connectionstatechange', () => {
+      setStatus(peerConnection.connectionState);
       console.log(`Connection state change: ${peerConnection.connectionState}`);
     });
   
@@ -86,6 +91,7 @@ const DebateRoom = (props) => {
         'offer': {
         type: offer.type,
         sdp: offer.sdp,
+        user: "sanket"
         },
     };
     await roomRef.set(roomWithOffer);
@@ -105,6 +111,7 @@ const DebateRoom = (props) => {
       const data = snapshot.data();
       if (!peerConnection.currentRemoteDescription && data && data.answer) {
         console.log('Got remote description: ', data.answer);
+        setGuest(data.answer.user);
         const rtcSessionDescription = new RTCSessionDescription(data.answer);
         await peerConnection.setRemoteDescription(rtcSessionDescription);
       }
@@ -167,6 +174,7 @@ const DebateRoom = (props) => {
       // Code for creating SDP answer below
       const offer = roomSnapshot.data().offer;
       console.log('Got offer:', offer);
+      setHost(offer.user);
       await peerConnection.setRemoteDescription(new RTCSessionDescription(offer));
       const answer = await peerConnection.createAnswer();
       console.log('Created answer:', answer);
@@ -176,6 +184,7 @@ const DebateRoom = (props) => {
         answer: {
           type: answer.type,
           sdp: answer.sdp,
+          user: "gatij"
         },
       };
       await roomRef.update(roomWithAnswer);
@@ -234,6 +243,16 @@ const DebateRoom = (props) => {
     props.debate(false);
   }
 
+  const onClickMute = async() =>{
+    if(mute === false){
+      localStream.current.srcObject.getAudioTracks()[0].enabled = false;
+      setMute(true);
+    }else{
+      localStream.current.srcObject.getAudioTracks()[0].enabled = true;
+      setMute(false);
+    }
+  }
+
   const onClickSymbl = () =>{
     const accessToken = symblToken.bearer;
     const uniqueMeetingId = btoa("user@example.com")
@@ -252,23 +271,29 @@ const DebateRoom = (props) => {
       }
       if (data.type === 'message_response') {
         for (let message of data.messages) {
+          let format = /[*]/;
+          console.log(format.test(message.payload.content))
           console.log('Transcript (more accurate): ', message.payload.content);
+          if(format.test(message.payload.content)){
+            alert('Debate ended for using cuss words!');
+            onClickHangUp();
+          }
         }
       }
       if (data.type === 'topic_response') {
         for (let topic of data.topics) {
-          console.log('Topic detected: ', topic.phrases)
+          // console.log('Topic detected: ', topic.phrases)
         }
       }
       if (data.type === 'insight_response') {
         for (let insight of data.insights) {
-          console.log('Insight detected: ', insight.payload.content);
+          // console.log('Insight detected: ', insight.payload.content);
         }
       }
       if (data.type === 'message' && data.message.hasOwnProperty('punctuated')) {
-        console.log('Live transcript (less accurate): ', data.message.punctuated.transcript)
+        // console.log('Live transcript (less accurate): ', data.message.punctuated.transcript)
       }
-      console.log(`Response type: ${data.type}. Object: `, data);
+      // console.log(`Response type: ${data.type}. Object: `, data);
     };
     
     // Fired when the WebSocket closes unexpectedly due to an error or lost connetion
@@ -332,15 +357,15 @@ const DebateRoom = (props) => {
         <span style={{display: "flex",
   justifyContent: "center",
   alignItems: "center", fontSize: "40px"}}>Mandir v/s Masjid</span>
-      <span style={{display: "flex",
+      {/* <span style={{display: "flex",
   justifyContent: "center",
   alignItems: "center", fontSize: "25px"}}>
         00:00
-      </span>
+      </span> */}
       <div>
       <Row align="middle">
-              <Col span={10}><AudioPlayer /></Col>
-              <Col span={10} push={3}><AudioPlayer /></Col>
+              <Col span={10}><AudioPlayer user={host} status={status} mute={mute} setMute={onClickMute}/></Col>
+              <Col span={10} push={3}><AudioPlayer user={guest} status={status}/></Col>
         </Row>
       </div>
       <div>

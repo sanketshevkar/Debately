@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Button } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
@@ -8,6 +8,11 @@ import { UserContext } from "../context/UserContext";
 import { logoutUser } from "../services/magic";
 import DebateRoom from "./DebateRoom";
 const Dashboard = () => {
+  useEffect(() => {
+    // Update the document title using the browser API
+    document.title = `You clicked ${count} times`;
+  }, []);
+
   const [debate, setDebate] = useState(false);
   const { email } = useContext(UserContext);
   const history = useHistory();
