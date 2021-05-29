@@ -27,3 +27,5 @@ yarn-debug.log*
 yarn-error.log*
 
 server/venv/
+
+server/MongoConnect.py
