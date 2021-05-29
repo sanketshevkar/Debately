@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory, withRouter } from "react-router-dom";
+import axios from 'axios'
 import { Button } from "antd";
 import { LogoutOutlined } from "@ant-design/icons";
 import ProfilePage from "./ProfilePage";
@@ -8,14 +9,19 @@ import { UserContext } from "../context/UserContext";
 import { logoutUser } from "../services/magic";
 import DebateRoom from "./DebateRoom";
 const Dashboard = () => {
-  useEffect(() => {
-    // Update the document title using the browser API
-    document.title = `You clicked ${count} times`;
-  }, []);
 
   const [debate, setDebate] = useState(false);
+  const [profile, setProfile] = useState({});
   const { email } = useContext(UserContext);
   const history = useHistory();
+  useEffect(() => {
+    const getProfile = async() =>{
+      const response = await axios.get(`https://debately.herokuapp.com/profiles/${email}`);
+      setProfile(response.data);
+      console.log(response.data)
+    }
+    getProfile();
+  }, []);
   const handleLogOut = async () => {
     try {
       await logoutUser();
@@ -27,7 +33,7 @@ const Dashboard = () => {
   if(debate === true){
     return(
       <div style={{ margin: "2rem" }}>
-          <DebateRoom debate={setDebate}/>
+          <DebateRoom debate={setDebate} profile={profile}/>
           <div style={{display: "flex",
           justifyContent: "center",
             alignItems: "center", marginTop: '2rem'}}>
@@ -43,9 +49,9 @@ const Dashboard = () => {
         </div>
         </div>
     )
-  }else{
+  }else if(profile !== null ){
     return( <div style={{ margin: "2rem" }}>
-    <ProfileViewer debate={setDebate}/>
+    <ProfileViewer debate={setDebate} profile={profile}/>
     <div style={{display: "flex",
           justifyContent: "center",
             alignItems: "center", marginTop: '2rem'}}>
@@ -61,7 +67,24 @@ const Dashboard = () => {
         </div>
   </div>
   )
-
+  }else{
+    return( <div style={{ margin: "2rem" }}>
+    <ProfilePage />
+    <div style={{display: "flex",
+          justifyContent: "center",
+            alignItems: "center", marginTop: '2rem'}}>
+          <Button
+            type="danger"
+            shape="round"
+            icon={<LogoutOutlined />}
+            size="large"
+            onClick={handleLogOut}
+          >
+            Sign Out
+          </Button>
+        </div>
+  </div>
+  )
   }
 };
 export default withRouter(Dashboard);

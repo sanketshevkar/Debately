@@ -91,7 +91,7 @@ const DebateRoom = (props) => {
         'offer': {
         type: offer.type,
         sdp: offer.sdp,
-        user: "sanket"
+        user: props.profile.user_name
         },
     };
     await roomRef.set(roomWithOffer);
@@ -184,7 +184,7 @@ const DebateRoom = (props) => {
         answer: {
           type: answer.type,
           sdp: answer.sdp,
-          user: "gatij"
+          user: props.profile.user_name
         },
       };
       await roomRef.update(roomWithAnswer);

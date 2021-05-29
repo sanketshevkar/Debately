@@ -3,14 +3,6 @@ import { Descriptions, Row, Col, Card, Skeleton, Avatar, Button } from "antd";
 import { UserOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 
 const ProfileViewer = (props) => {
-  const [userProfile, setUserProfile] = useState({
-    userName: "test",
-    email: "test@gmail.com",
-    rating: 2,
-    walletAmount: 200,
-  });
-
-  // const {debate, setDebate} = useState(props.debate);
 
   const { Meta } = Card;
 
@@ -39,13 +31,13 @@ const ProfileViewer = (props) => {
               description={
               <div>
                 <span style={{fontSize: '30px', fontWeight: 'strong'}}>
-                  <b>Username</b>
+                  <b>{props.profile.user_name}</b>
                 </span>
                 <div style={{fontSize: '15px'}}>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. it to make a type specimen book.
+                {props.profile.description}
                 </div>
                 <div style={{fontSize: '15px', marginTop: '5px'}}>
-                  <span><b>Birth-Date:</b> </span><span>23/12/2000</span>
+                  <span><b>Birth-Date:</b> </span><span>{props.profile.birth_date}</span>
                 </div>
               </div>}
             />
