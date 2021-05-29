@@ -11,5 +11,8 @@ def connectMongoClient():
     print('DB connected')
     return db
 
+if __name__ == '__main__':  
+    connectMongoClient()
+
 
         
