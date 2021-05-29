@@ -6,6 +6,7 @@ import {
   Input,
   Button,
   Card,
+  DatePicker
 } from "antd";
 
 const ProfilePage = () => {
@@ -20,9 +21,12 @@ const ProfilePage = () => {
   };
   return (
     <div>
+      <span style={{display: "flex",
+  justifyContent: "center",
+  alignItems: "center", fontSize: "40px"}}>Build Your Profile ✨</span>
       <Row>
-        <Col span={8} offset={7}>
-          <Card>
+        <Col span={8} offset={8}>
+          <Card bodyStyle={{borderStyle:'solid' ,borderRadius: '10px', borderColor: 'gray'}}>
             <Form
               name="basic"
               initialValues={{
@@ -31,30 +35,21 @@ const ProfilePage = () => {
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
             >
-              <Form.Item
-                label="Username"
-                name="username"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your username!",
-                  },
-                ]}
-              >
-                <Input />
+              
+              <Form.Item>
+                <Input placeholder="Email ID"/>
               </Form.Item>
 
-              <Form.Item
-                label="Email"
-                name="email"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your name!",
-                  },
-                ]}
-              >
-                <Input />
+              <Form.Item>
+                <Input placeholder="Username"/>
+              </Form.Item>
+
+              <Form.Item>
+                <DatePicker placeholder="DOB"/>
+              </Form.Item>
+
+              <Form.Item>
+                <Input.TextArea placeholder="Description About Yourself"/>
               </Form.Item>
 
               <Form.Item>

@@ -13,6 +13,7 @@ import Dashboard from './components/Dashboard';
 import Meeting from './components/Meeting';
 import DebateRoom from './components/DebateRoom';
 import PrivateRoute from './components/PrivateRoute';
+import Navbar from './components/Navbar';
 const App = () => {
   const [user, setUser] = useState({ isLoggedIn: null, email: '' });
   const [loading, setLoading] = useState();
@@ -40,8 +41,9 @@ const App = () => {
   }
   return (
     <UserContext.Provider value={user}>
+      <Navbar />
       <Router>
-        {user.isLoggedIn && <Redirect to={{ pathname: '/debateRoom' }} />}
+        {user.isLoggedIn && <Redirect to={{ pathname: '/dashboard' }} />}
         <Switch>
           <Route exact path="/" component={Authenticate} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
