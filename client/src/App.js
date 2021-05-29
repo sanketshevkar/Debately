@@ -15,6 +15,10 @@ import Dashboard from "./components/Dashboard";
 import Meeting from "./components/Meeting";
 import DebateRoom from "./components/DebateRoom";
 import PrivateRoute from "./components/PrivateRoute";
+import ProfilePage from './components/ProfilePage';
+import ProfileViewer from './components/ProfileViewer'
+
+
 const App = () => {
   const [user, setUser] = useState({ isLoggedIn: null, email: "" });
   const [loading, setLoading] = useState();
@@ -32,10 +36,7 @@ const App = () => {
   }, [user.isLoggedIn]);
   if (loading) {
     return (
-      <div
-        // className="d-flex justify-content-center align-items-center"
-        // style={{ height: "100vh" }}
-      >
+      <div>
         <Spinner animation="border" />
       </div>
     );
@@ -51,6 +52,8 @@ const App = () => {
             <PrivateRoute path="/dashboard" component={Dashboard} />
             <PrivateRoute path="/meetings" component={Meeting} />
             <PrivateRoute path="/debateRoom" component={DebateRoom} />
+            <Route path="/profilePage" component={ProfilePage} />
+            <Route path="/profileViewer" component={ProfileViewer} />
           </Switch>
         </Router>
       </UserContext.Provider>
