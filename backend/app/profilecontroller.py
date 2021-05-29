@@ -2,12 +2,16 @@ from fastapi import APIRouter
 # from ..configs.mongoconnect import connectMongoClient
 from .models import Profile
 
+<<<<<<< HEAD:backend/app/profilecontroller.py
 <<<<<<< HEAD:app/ProfileController.py
 
 app = FastAPI()
 =======
 router = APIRouter(prefix="/profiles")  
 >>>>>>> df059f84cc2b71ec83f5c36721e0708df14c1514:backend/app/profilecontroller.py
+=======
+router = APIRouter(prefix="/profiles")  
+>>>>>>> df059f84cc2b71ec83f5c36721e0708df14c1514:server/ProfileController.py
 
 @router.get('/')
 def getProfiles():

@@ -26,6 +26,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-app/venv/
+backend/app/venv/
 
-app/__pycache__/
+backedn/app/__pycache__/
