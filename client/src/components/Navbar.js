@@ -1,5 +1,5 @@
 import React from "react";
-import { PageHeader } from "antd";
+import { PageHeader, Image } from "antd";
 import "../css/Navbar.css";
 import logo from "../assets/logo512.png";
 
@@ -7,11 +7,7 @@ const Navbar = () => {
   return (
     <div>
       <PageHeader className="site-page-header">
-        <img
-          src={logo}
-          height={60}
-          style={{ margin: "0 12px 0 0", float: "left" }}
-        />
+        <Image src={logo} height={50} width={50}/>
       </PageHeader>
     </div>
   );
