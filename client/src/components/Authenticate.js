@@ -1,63 +1,95 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { loginUser } from "../services/magic";
 import {
-  Button,
   Form,
-  FormGroup,
-  FormLabel,
-  FormControl,
-} from 'react-bootstrap';
-import { loginUser } from '../services/magic';
+  Input,
+  Button,
+  Card,
+  Row,
+  Col,
+  Typography,
+  Image,
+  Layout,
+} from "antd";
+import logo from "../assets/logo512.png";
+
 const Authenticate = () => {
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState('');
+  const { Title } = Typography;
+  const { Footer, Content } = Layout;
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState("");
   const [error, setError] = useState(null);
   const history = useHistory();
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     setLoading(true);
     if (!email) {
       setLoading(false);
-      setError('Email is Invalid');
+      setError("Email is Invalid");
       return;
     }
     try {
       await loginUser(email);
       setLoading(false);
-      history.push('/dashboard');
+      history.push("/dashboard");
       window.location.reload();
     } catch (error) {
-      setError('Unable to log in');
+      setError("Unable to log in");
       console.error(error);
     }
   };
   const handleChange = (event) => {
+    console.log(event.target.value);
     setEmail(event.target.value);
   };
+
   return (
-    <div className="w-50 p-5 mt-5 mx-auto">
-      <h1 className="h1 text-center">React Magic Form</h1>
-      <Form onSubmit={handleSubmit} className="p-2 my-5 mx-auto">
-        <FormGroup className="mt-3" controlId="formBasicEmail">
-          <FormLabel fontSize="sm">Enter Email Address</FormLabel>
-          <FormControl
-            type="email"
-            name="email"
-            value={email}
-            onChange={handleChange}
-            placeholder="Email Address"
-          />
-          <p className="text-danger text-small">{error}</p>
-        </FormGroup>
-        <Button
-          type="submit"
-          size="md"
-          className="d-block w-100"
-          variant="primary"
-        >
-          {loading ? 'Loading...' : 'Send'}
-        </Button>
-      </Form>
+    <div>
+      <Row>
+        <Col xs={{ span: 5, offset: 1 }} lg={{ span: 6, offset: 2 }}>
+          <Card>
+            <Title>Login</Title>
+
+            <Form onFinish={handleSubmit}>
+              <Form.Item
+                label="Email"
+                name="email"
+                rules={[
+                  { required: true, message: "Please input your email!" },
+                ]}
+              >
+                <Input
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                />
+              </Form.Item>
+
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  {loading ? "Loading..." : "Send"}
+                </Button>
+              </Form.Item>
+            </Form>
+          </Card>
+          <h1>Content</h1>
+          <h1>Content</h1>
+          <h1>Content</h1>
+          <h1>Content</h1>
+        </Col>
+
+        <Col span={4}></Col>
+
+        <Col span={4}>
+          <Image src={logo} />
+          <h1>Content</h1>
+          <h1>Content</h1>
+          <h1>Content</h1>
+          <h1>Content</h1>
+        </Col>
+      </Row>
     </div>
   );
 };

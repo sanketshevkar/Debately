@@ -41,7 +41,7 @@ const App = () => {
   return (
     <UserContext.Provider value={user}>
       <Router>
-        {user.isLoggedIn && <Redirect to={{ pathname: '/dashboard' }} />}
+        {user.isLoggedIn && <Redirect to={{ pathname: '/debateRoom' }} />}
         <Switch>
           <Route exact path="/" component={Authenticate} />
           <PrivateRoute path="/dashboard" component={Dashboard} />
