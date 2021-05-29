@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Row,
   Col,
@@ -8,12 +8,35 @@ import {
   Card,
   DatePicker
 } from "antd";
+import axios from "axios";
 
 const ProfilePage = () => {
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     //post input to api using axios
-    console.log("Success:", values);
+    // console.log("Success:", values);
+    const { email,
+      user_name,
+      description } = values
+
+      const profile = {
+        email: email,
+        user_name: user_name,
+        description: description,
+        birth_date: "10/01/2000",
+        name: " ",
+        wallet_amt: 0,
+        rating: 0,
+        total_debates_attended: 0,
+        meeting_id_list: [
+        ]
+      }
+
+
+    const response = await axios.post('https://debately.herokuapp.com/profiles/', profile);
+    console.log(response);
+    window.location.reload();
+
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -21,12 +44,14 @@ const ProfilePage = () => {
   };
   return (
     <div>
-      <span style={{display: "flex",
-  justifyContent: "center",
-  alignItems: "center", fontSize: "40px"}}>Build Your Profile ✨</span>
+      <span style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center", fontSize: "40px"
+      }}>Build Your Profile ✨</span>
       <Row>
         <Col span={8} offset={8}>
-          <Card bodyStyle={{borderStyle:'solid' ,borderRadius: '10px', borderColor: 'gray'}}>
+          <Card bodyStyle={{ borderStyle: 'solid', borderRadius: '10px', borderColor: 'gray' }}>
             <Form
               name="basic"
               initialValues={{
@@ -35,21 +60,21 @@ const ProfilePage = () => {
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
             >
-              
-              <Form.Item>
-                <Input placeholder="Email ID"/>
+
+              <Form.Item name="email">
+                <Input placeholder="Email ID" />
               </Form.Item>
 
-              <Form.Item>
-                <Input placeholder="Username"/>
+              <Form.Item name="user_name">
+                <Input placeholder="Username" />
               </Form.Item>
 
-              <Form.Item>
-                <DatePicker placeholder="DOB"/>
+              <Form.Item name="birth_date">
+                <DatePicker placeholder="DOB" />
               </Form.Item>
 
-              <Form.Item>
-                <Input.TextArea placeholder="Description About Yourself"/>
+              <Form.Item name="description">
+                <Input.TextArea placeholder="Description About Yourself" />
               </Form.Item>
 
               <Form.Item>
