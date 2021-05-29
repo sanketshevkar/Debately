@@ -4,6 +4,7 @@ import { Row, Col, Button } from 'antd';
 import firebase from '../firebase/index';
 import Modal from './Modal';
 import symblToken from '../symblToken';
+import axios from 'axios';
 import { PropertySafetyFilled } from '@ant-design/icons';
 
 const DebateRoom = (props) => {
@@ -17,6 +18,7 @@ const DebateRoom = (props) => {
   const [guest, setGuest] = useState("");
   const [status, setStatus] = useState("Not Connected");
   const [mute, setMute] = useState(false);
+  const [conversationId, setConversationId] = useState("");
 
   const localStream = useRef();
   const remoteStream = useRef();
@@ -215,7 +217,8 @@ const DebateRoom = (props) => {
     setHangUpButton(false);
   }
 
-  const onClickHangUp = () =>{
+  const onClickHangUp = async() =>{
+    await axios.post('https://debately.herokuapp.com/profiles/add_meeting', {profile_email: props.profile.email, meeting_id: conversationId})
     const tracks = localStream.current.srcObject.getTracks();
     tracks.forEach(track => {
       track.stop();
@@ -267,6 +270,7 @@ const DebateRoom = (props) => {
       // You can find the conversationId in event.message.data.conversationId;
       const data = JSON.parse(event.data);
       if (data.type === 'message' && data.message.hasOwnProperty('data')) {
+        setConversationId(data.message.data.conversationId);
         console.log('conversationId', data.message.data.conversationId);
       }
       if (data.type === 'message_response') {
