@@ -91,9 +91,7 @@ const Authenticate = () => {
         </Col>
       </Row>
 
-
-
-      <Footer style={{ textAlign: 'center' }}>Developed by team Tier-4</Footer>
+      <Footer style={{ textAlign: "center" }}>Developed by team Tier-4</Footer>
     </div>
   );
 };
