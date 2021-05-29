@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@material/react-dialog": "^0.15.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "antd": "^4.16.0",
     "bootstrap": "^5.0.1",
     "firebase": "^8.6.3",
     "magic-sdk": "^4.3.0",
