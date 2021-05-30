@@ -1,7 +1,12 @@
-# Debately 
-Smart Debate analysis platform.
+![firebase](https://img.shields.io/badge/-firebase-orange)
+![reactjs](https://img.shields.io/badge/-reactjs-blue)
+![mongodb](https://img.shields.io/badge/-mongodb-brightgreen)
+![fastapi](https://img.shields.io/badge/-fastapi-informational)
+
+# Debately
+![logo](https://camo.githubusercontent.com/4c64e0379b448981209cefc968c967242fee845f403a32f02dae6f94f01c27c3/68747470733a2f2f6261736963776562636861746170702e73332e61702d736f7574682d312e616d617a6f6e6177732e636f6d2f696d6167652e6a7067)\
+Smart Debate analysis platform. </br>
 Main server for managing all the services in the project.
-![ezgif com-gif-maker] embed video here
 
 ### Prerequisites
 This project has 2 seperate components,front-end and back-end.The front-end has node-module dependancies and requires node runtime.
@@ -26,6 +31,11 @@ The back-end is developed using fastapi and has pip dependencies.
 
 #### Firebase config file
 ```sh
+cd ./client/src/firebase
+```
+Create firebase config file.\
+File name - index.js
+```sh
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -43,6 +53,11 @@ export default firebase;
 ````
 
 #### Magic API config file
+```sh
+cd ./client/src
+```
+Create magic config file.\
+File name - magicKey.js
 ```sh
 const magicKey = {
     API_KEY: ''
