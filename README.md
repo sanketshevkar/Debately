@@ -70,7 +70,7 @@ export default magicKey;
 #### Starting the Back-end Server
  ```sh 
  pip install -r requirements.txt
- cd ./backend
+ cd ./debately.deploy/backend
  uvicorn backend.app.main:app 
  ```
  
