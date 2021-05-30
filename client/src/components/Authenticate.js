@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { loginUser } from "../services/magic";
 import { ThunderboltOutlined } from "@ant-design/icons";
@@ -22,6 +22,11 @@ const Authenticate = () => {
   const [loading, setLoading] = useState("");
   const [error, setError] = useState(null);
   const history = useHistory();
+
+  useEffect(() => {
+    alert("Please ensure that you connect using mobile internet hotspot! This app uses TURN severs for WebRTC connections, so NAT traversal for devices connected to wifi or behind firewall is not possible! Sorry for the inconvinience!")
+  }, []);
+
   const handleSubmit = async (event) => {
     // event.preventDefault();
     setLoading(true);
@@ -83,7 +88,7 @@ const Authenticate = () => {
           </div>
           <div style={{margin: "3rem"}}>
             <span style={{fontSize: "2.6rem"}}>
-               New, Fun and Safe To Practice Debating!
+               New, Fun and Safe Way To Practice Debating!
             </span>
           </div>
         </Col>

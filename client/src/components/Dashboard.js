@@ -34,6 +34,13 @@ const Dashboard = () => {
   const onClickAnalyse = async(meeting_id) =>{
     const response = await axios.get(`https://debately.herokuapp.com/profiles/analytics/${meeting_id}`);
     console.log(response.data)
+    const element = document.createElement("a");
+    const file = new Blob([JSON.stringify(response.data)], {type: 'text/plain'});
+    element.href = URL.createObjectURL(file);
+    element.download = `${meeting_id}_analytics.txt`;
+    document.body.appendChild(element); // Required for this to work in FireFox
+    element.click();
+
   }
 
   if(debate === true){
@@ -88,7 +95,7 @@ const Dashboard = () => {
 )}
   </div>
   )
-  }else{
+  }else if(profile === null){
     return( <div style={{ margin: "2rem" }}>
     <ProfilePage />
     <div style={{display: "flex",
@@ -106,6 +113,10 @@ const Dashboard = () => {
         </div>
   </div>
   )
+  }else{
+    return(
+      <div></div>
+    )
   }
 };
 export default withRouter(Dashboard);

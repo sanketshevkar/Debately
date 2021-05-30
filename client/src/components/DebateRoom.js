@@ -6,6 +6,7 @@ import Modal from './Modal';
 import symblToken from '../symblToken';
 import axios from 'axios';
 import { PropertySafetyFilled } from '@ant-design/icons';
+import randomstring from 'randomstring';
 
 const DebateRoom = (props) => {
   const [mediaButton, setMediaButton] = useState(false);
@@ -258,7 +259,11 @@ const DebateRoom = (props) => {
 
   const onClickSymbl = () =>{
     const accessToken = symblToken.bearer;
-    const uniqueMeetingId = btoa("user@example.com")
+    const meetingStr = randomstring.generate({
+      length: 12,
+      charset: 'alphabetic'
+    });
+    const uniqueMeetingId = btoa(meetingStr)
     const symblEndpoint = `wss://api.symbl.ai/v1/realtime/insights/${uniqueMeetingId}?access_token=${accessToken}`;
     
     const ws = new WebSocket(symblEndpoint);
@@ -325,7 +330,7 @@ const DebateRoom = (props) => {
           }
         },
         speaker: {
-          userId: 'example@symbl.ai',
+          userId: 'exampe@symbl.ai',
           name: 'Example Sample',
         }
       }));
@@ -360,7 +365,7 @@ const DebateRoom = (props) => {
     <div>
         <span style={{display: "flex",
   justifyContent: "center",
-  alignItems: "center", fontSize: "40px"}}>Mandir v/s Masjid</span>
+  alignItems: "center", fontSize: "40px"}}>Debate Topic</span>
       {/* <span style={{display: "flex",
   justifyContent: "center",
   alignItems: "center", fontSize: "25px"}}>

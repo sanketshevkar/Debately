@@ -43,10 +43,10 @@ const App = () => {
     <UserContext.Provider value={user}>
       <Navbar />
       <Router>
-        {user.isLoggedIn && <Redirect to={{ pathname: '/dashboard' }} />}
+        {user.isLoggedIn && <Redirect to={{ pathname: '/app' }} />}
         <Switch>
           <Route exact path="/" component={Authenticate} />
-          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/app" component={Dashboard} />
           <PrivateRoute path="/meetings" component={Meeting} />
           <PrivateRoute path="/debateRoom" component={DebateRoom} />
         </Switch>
